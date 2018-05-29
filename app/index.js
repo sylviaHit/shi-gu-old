@@ -12,17 +12,15 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native';
+import TestStar from './pages/home/Test';
+import HeartTest from './pages/home/HeartTest';
 
 type Props = {};
 export default class HomePage extends Component<Props> {
 
     render() {
         return (
-            <View>
-                <Text>
-                    拾谷
-                </Text>
-            </View>
+            <HeartTest/>
         );
     }
 }
