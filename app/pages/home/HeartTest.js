@@ -136,28 +136,44 @@ export default  class HeartTest extends Component {
 
             let position = getXYParticle(7, i, radius)
 
+            let heart_fill = this.state.animation.interpolate({
+                inputRange: [0, 2],
+                outputRange: [GRAY_HEART_COLOR, HEART_COLOR],
+                extrapolate: 'clamp'
+            })
+
+            let data = {
+                x: moveUp,
+                y:moveUp,
+                radius:15,
+                scale:{scaleOut},
+                fill:{color_bottom_particle}
+            }
+
             items.push (
-                <Group
-                    x={position.x + offset.x }
-                    y={position.y + offset.y}
-                    rotation={getRandomInt(0, 40) * i}
+                <AnimatedCircle
                     key={i}
-                >
-                    <AnimatedCircle
-                        x={moveUp}
-                        y={moveUp}
-                        radius={15}
-                        scale={scaleOut}
-                        fill={color_top_particle}
-                    />
-                    <AnimatedCircle
-                        x={moveDown}
-                        y={moveDown}
-                        radius={8}
-                        scale={scaleOut}
-                        fill={color_bottom_particle}
-                    />
-                </Group>
+                    data={data}
+
+                />
+                // <Group
+                //     x={position.x + offset.x }
+                //     y={position.y + offset.y}
+                //     rotation={getRandomInt(0, 40) * i}
+                //     key={i}
+                // >
+                //     <AnimatedCircle
+                //         data={data}
+                //
+                //     />
+                //     {/*<AnimatedCircle*/}
+                //         {/*x={moveDown}*/}
+                //         {/*y={moveDown}*/}
+                //         {/*radius={8}*/}
+                //         {/*scale={scaleOut}*/}
+                //         {/*fill={color_bottom_particle}*/}
+                //     {/*/>*/}
+                // </Group>
             );
             console.log('items', items);
             return items;
@@ -212,6 +228,49 @@ export default  class HeartTest extends Component {
         })
 
 
+        const path = new Path()
+            .moveTo(50,1)
+            .arc(0,99,25)
+            .arc(0,-99,25)
+            .close();
+
+        let scaleOut = this.state.animation.interpolate({
+            inputRange: [0, 5.99, 6, 13.99, 14, 21],
+            outputRange: [0, 0, 1, 1, 1, 0],
+            extrapolate: 'clamp'
+        });
+
+
+        const data1 = {
+            radius:150,
+            x:89,
+            y:75,
+            strokeWidth:{circle_stroke_width},
+            stroke:FILL_COLORS[2],
+            scale:scaleOut,
+            fill:circle_fill_colors,
+            opacity:circle_opacity
+        };
+        const data2 = {
+            radius:150,
+            x:189,
+            y:75,
+            strokeWidth:{circle_stroke_width},
+            stroke:FILL_COLORS[2],
+            scale:scaleOut,
+            fill:circle_fill_colors,
+            opacity:circle_opacity
+        };
+        const data3 = {
+            radius:150,
+            x:89,
+            y:175,
+            strokeWidth:{circle_stroke_width},
+            stroke:FILL_COLORS[2],
+            scale:scaleOut,
+            fill:circle_fill_colors,
+            opacity:circle_opacity
+        };
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.explode} style={styles.container}>
@@ -225,18 +284,14 @@ export default  class HeartTest extends Component {
                                     scale={heart_scale}
                                     fill={heart_fill}
                                 />
-                                <AnimatedShape
-                                    d={HEART_SVG}
-                                    x={189}
-                                    y={75}
-                                    radius={150}
-                                    scale={heart_scale}
-                                    fill={heart_fill}
-                                    // scale={circle_scale}
-                                    // strokeWidth={circle_stroke_width}
-                                    // stroke={FILL_COLORS[2]}
-                                    // fill={circle_fill_colors}
-                                    // opacity={circle_opacity}
+                                <AnimatedCircle
+                                    data={data1}
+                                />
+                                <AnimatedCircle
+                                    data={data2}
+                                />
+                                <AnimatedCircle
+                                    data={data3}
                                 />
 
                                 {/*{this.getSmallExplosions(75, {x: 89, y: 75})}*/}
@@ -251,13 +306,26 @@ export default  class HeartTest extends Component {
 
 class AnimatedCircle extends Component {
     render() {
-        console.log('render');
-        let radius = this.props.radius;
+        const { x, y, stroke, strokeWidth, radius, scale, fill, opacity } = this.props.data;
+        console.log('render', this.props.data, x, y, radius, scale, fill);
+
         let path = Path().moveTo(0, -radius)
             .arc(0, radius * 2, radius)
             .arc(0, radius * -2, radius)
             .close();
-        return React.createElement(AnimatedShape);
+
+        return(
+            <AnimatedShape
+                d={path}
+                stroke={stroke || "#000000"}
+                strokeWidth={strokeWidth || 1}
+                x={x}
+                y={y}
+                scale={scale}
+                fill={fill}
+                opacity={opacity || ''}
+            />
+        )
     }
 }
 
