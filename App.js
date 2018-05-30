@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import {
   Platform
 } from 'react-native';
-import HomePage from './app/index';
+import ShiGu from './app/index';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -21,7 +21,7 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-        <HomePage/>
+        <ShiGu/>
     );
   }
 }
