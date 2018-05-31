@@ -1,68 +1,28 @@
 /**
- * homePage
+ * 导航设置页
  */
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    ImageBackground,
-    View,
-    Text
-} from 'react-native';
 import HomePage from './pages/home/HomePage';
 import Poetry from './pages/poetry/Poetry';
+import Person from './pages/person/Person';
+import { createStackNavigator } from 'react-navigation';
 
 
-type Props = {};
-export default class ShiGu extends Component<Props> {
-
-    constructor(props){
-        super(props);
-        this.state = {
-            currentPage: 'home'
-        }
+const RootStack = createStackNavigator(
+    {
+        Home: { screen: HomePage },
+        Poetry:{ screen: Poetry },
+        Person: { screen: Person }
+    },
+    {
+        initialRouteName: 'Home',
+        mode: 'modal',
+        headerMode: 'none',
     }
+);
 
-    /**
-     * 当前页面修改
-     * @returns {*}
-     */
-    currentPageChange = (page) => {
-        console.log('page', page);
-        this.setState({
-            currentPage: page
-        })
-    }
-
+export default class App extends React.Component {
     render() {
-        // getRequest('https://cbdb.fas.harvard.edu/cbdbapi/person.php?name=王安石&o=json');
-        const { currentPage } = this.state;
-        console.log('currentPage', currentPage);
-        let Component = HomePage;
-        switch(currentPage){
-            case 'home':
-                Component = HomePage;
-                break;
-            case 'poetry':
-                Component = Poetry;
-                break;
-            default:
-                Component = HomePage;
-                break;
-        }
-
-        return (
-            <Component currentPageChange={this.currentPageChange}/>
-
-        );
+        return <RootStack />;
     }
 }
-
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-});

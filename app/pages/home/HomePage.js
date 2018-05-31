@@ -4,6 +4,8 @@ import React ,{
 }from 'react';
 import {Animated, View, Easing, ImageBackground, TouchableOpacity, Dimensions, StyleSheet, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { createStackNavigator } from 'react-navigation';
+import Person from "../person/Person";
 
 
 export default class HomePage extends Component{
@@ -15,6 +17,11 @@ export default class HomePage extends Component{
         };
         this.currentPageChange = this.currentPageChange.bind(this);
     }
+
+    static navigationOptions = ({navigation}) => ({
+        header: null,
+    });
+
 
     animation = () => {
         this.state.top.setValue(0);
@@ -44,7 +51,7 @@ export default class HomePage extends Component{
             ['#f3b41b', '#f0f32e', '#b9937e'],
             ['#783e3c', '#ff2511', '#88222d']
         ];
-        let pages=['poetry', 'person', 'road'];
+        let pages=['Poetry', 'Person', 'road'];
         let views = this.state.anim.map(function(value, i) {
             return (
                 <Animated.View
@@ -57,7 +64,7 @@ export default class HomePage extends Component{
                     }, {
                         top: -50*i+top[i]
                     }]}>
-                    <TouchableOpacity style={styles.linearGradient} onPress={()=>self.currentPageChange(self, pages[i])}>
+                    <TouchableOpacity style={styles.linearGradient} onPress={() => this.props.navigation.navigate(pages[0])}>
                         <LinearGradient colors={colors[i]} style={styles.demo}/>
                     </TouchableOpacity>
                 </Animated.View>
@@ -96,8 +103,10 @@ export default class HomePage extends Component{
                                 }
                             ]
                         }]}>
-                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[0])}>
-                            <LinearGradient colors={colors[0]} style={styles.demo}/>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate(pages[0])}>
+                            <LinearGradient colors={colors[0]} style={styles.demo}>
+                                <Text>{pages[0]}</Text>
+                            </LinearGradient>
                         </TouchableOpacity>
                     </Animated.View>
                     <Animated.View
@@ -117,8 +126,10 @@ export default class HomePage extends Component{
                             ]
                         },{top: -100+110}, {left: -100}, {borderWidth: 0}, {width: 120}, {height: 120}
                         ]}>
-                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[1])}>
-                            <LinearGradient colors={colors[1]} style={styles.demo}/>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate(pages[1])}>
+                            <LinearGradient colors={colors[1]} style={styles.demo}>
+                                <Text>{pages[1]}</Text>
+                            </LinearGradient>
                         </TouchableOpacity>
                     </Animated.View>
                     <Animated.View
@@ -138,7 +149,7 @@ export default class HomePage extends Component{
                             ]
                         },{top: -240+110}, {left: 100}, {borderWidth: 0}, {width: 120}, {height: 120}
                         ]}>
-                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[2])}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Poetry')}>
                             <LinearGradient colors={colors[2]} style={styles.demo}/>
                         </TouchableOpacity>
                     </Animated.View>
@@ -159,7 +170,7 @@ export default class HomePage extends Component{
                             ]
                         },{top: -360+240}, {left: -60}, {borderWidth: 0}, {width: 120}, {height: 120}
                         ]}>
-                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[2])}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Poetry')}>
                             <LinearGradient colors={colors[3]} style={styles.demo}/>
                         </TouchableOpacity>
                     </Animated.View>
@@ -180,7 +191,7 @@ export default class HomePage extends Component{
                             ]
                         },{top: -480+240}, {left: 60}, {borderWidth: 0}, {width: 120}, {height: 120}
                         ]}>
-                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[2])}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Poetry')}>
                             <LinearGradient colors={colors[4]} style={styles.demo}/>
                         </TouchableOpacity>
                     </Animated.View>
@@ -219,6 +230,11 @@ const styles = StyleSheet.create({
         backgroundColor:'#504488',
         borderRadius: 40,
         transform: [{rotateZ:'45deg'}],
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    content: {
+        transform: [{rotateZ:'-45deg'}],
     },
     test: {
         width: 65,
