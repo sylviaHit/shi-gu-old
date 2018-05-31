@@ -16,67 +16,17 @@ export default class HomePage extends Component{
         this.currentPageChange = this.currentPageChange.bind(this);
     }
 
-    componentDidMount() {
-
+    animation = () => {
+        this.state.top.setValue(0);
         Animated.timing(this.state.top, {
             toValue: 1, // 目标值
             duration: 30000, // 动画时间
             easing: Easing.linear // 缓动函数
-        }).start();
-        //
-        // let timing = Animated.timing;
-        //
-        // Animated.sequence([
-        //         // Animated.stagger(200, this.state.anim.map(left => {
-        //         //     return timing(left, {
-        //         //         toValue: 1,
-        //         //     });
-        //         // }).concat(
-        //         //     this.state.anim.map(left => {
-        //         //         return timing(left, {
-        //         //             toValue: 0,
-        //         //         });
-        //         //     })
-        //         // )), // 三个view滚到右边再还原，每个动作间隔200ms
-        //         // timing(this.state.top, {
-        //         //     toValue: 1
-        //         // }),
-        //         // Animated.delay(400), // 延迟400ms，配合sequence使用
-        //         timing(this.state.anim[0], {
-        //             toValue: -0.25
-        //         }),
-        //         timing(this.state.anim[1], {
-        //             toValue: 0.45
-        //         }),
-        //         timing(this.state.anim[2], {
-        //             toValue: 0.15
-        //         }),
-        //         Animated.delay(400),
-        //     timing(this.state.anim[0], {
-        //         toValue: 0.45
-        //     }),
-        //     timing(this.state.anim[1], {
-        //         toValue: 0.15
-        //     }),
-        //     timing(this.state.anim[2], {
-        //         toValue: -0.25
-        //     }),
-        //     Animated.delay(400),
-        //     timing(this.state.anim[0], {
-        //         toValue: 0.15
-        //     }),
-        //     timing(this.state.anim[1], {
-        //         toValue: -0.25
-        //     }),
-        //     timing(this.state.anim[2], {
-        //         toValue: 0.45
-        //     }),
-        //
-        //         // Animated.parallel(this.state.anim.map((anim) => timing(anim, {
-        //         //     toValue: 0
-        //         // }))) // 同时回到原位置
-        //     ]
-        // ).start();
+        }).start(()=>this.animation());
+    }
+
+    componentDidMount() {
+        this.animation();
     }
 
     currentPageChange = (e, page) => {
@@ -88,9 +38,11 @@ export default class HomePage extends Component{
         let self = this;
         let top = [70, 130, 230];
         let colors = [
-            ['#f77695', '#a050a9', '#55236a'],
-            ['#55843e', '#446d76', '#7898b9'],
-            ['#5b5078', '#b090a7', '#7484b8']
+            ['#f77695', '#dfe3e4', '#55236a'],
+            ['#55843e', '#c5ffa9', '#7898b9'],
+            ['#5b5078', '#ffb3f0', '#7484b8'],
+            ['#f3b41b', '#f0f32e', '#b9937e'],
+            ['#783e3c', '#ff2511', '#88222d']
         ];
         let pages=['poetry', 'person', 'road'];
         let views = this.state.anim.map(function(value, i) {
@@ -112,61 +64,129 @@ export default class HomePage extends Component{
 
             );
         });
-        // ,{top: 70}, {left: -60}, {borderWidth: 2}, {width: 80}, {height: 80}
 
         return(
             <ImageBackground style={styles.wrap} source= {require('../../images/bg.gif')}>
                 <Animated.View
-                    style={[styles.container, {
-                        transform: [{
+                    style={[styles.container
+                        , {
+                        transform: [
+                            {
                             rotateZ: this.state.top.interpolate({
                                 inputRange: [0,1],
                                 outputRange: ['360deg', '0deg']
                             })
-                        }]
-                    }]}>
-                    {/*{views}*/}
+                        },
+                        ]
+                    }
+                    ]}>
                     <Animated.View
-                        style={[{top: 70}, {left: -60}, {borderWidth: 2}, {width: 80}, {height: 80}, {
-                            transform: [{
+                        style={[{top: 40}, {left: 0}, {borderWidth: 0}, {width: 120}, {height: 120}, {
+                            transform: [
+                                {
                                 rotateZ: this.state.top.interpolate({
                                     inputRange: [0,1],
-                                    outputRange: ['360deg', '0deg']
-                                })
-                            }]
+                                    outputRange: ['0deg', '360deg']
+                                })},
+                                {
+                                    rotateX: this.state.top.interpolate({
+                                        inputRange: [0,0.5,1],
+                                        outputRange: ['30deg', '0deg', '30deg']
+                                    })
+                                }
+                            ]
                         }]}>
-                        <TouchableOpacity style={styles.linearGradient} onPress={()=>self.currentPageChange(self, pages[0])}>
+                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[0])}>
                             <LinearGradient colors={colors[0]} style={styles.demo}/>
                         </TouchableOpacity>
                     </Animated.View>
-                    {/*<View*/}
-                        {/*style={[{*/}
-                            {/*transform: [{*/}
-                                {/*rotateZ: this.state.top.interpolate({*/}
-                                    {/*inputRange: [0,1],*/}
-                                    {/*outputRange: ['360deg', '0deg']*/}
-                                {/*})*/}
-                            {/*}]*/}
-                        {/*},{top: 170}, {left: 10}, {borderWidth: 2}, {width: 80}, {height: 80}*/}
-                        {/*]}>*/}
-                        {/*<TouchableOpacity style={styles.linearGradient} onPress={()=>self.currentPageChange(self, pages[1])}>*/}
-                            {/*<LinearGradient colors={colors[1]} style={styles.demo}/>*/}
-                        {/*</TouchableOpacity>*/}
-                    {/*</View>*/}
-                    {/*<View*/}
-                        {/*style={[{*/}
-                            {/*transform: [{*/}
-                                {/*rotateZ: this.state.top.interpolate({*/}
-                                    {/*inputRange: [0,1],*/}
-                                    {/*outputRange: ['360deg', '0deg']*/}
-                                {/*})*/}
-                            {/*}]*/}
-                        {/*},{top: 10}, {left: 80}, {borderWidth: 2}, {width: 80}, {height: 80}*/}
-                        {/*]}>*/}
-                        {/*<TouchableOpacity style={styles.linearGradient} onPress={()=>self.currentPageChange(self, pages[2])}>*/}
-                            {/*<LinearGradient colors={colors[2]} style={styles.demo}/>*/}
-                        {/*</TouchableOpacity>*/}
-                    {/*</View>*/}
+                    <Animated.View
+                        style={[{
+                            transform: [
+                                {
+                                    rotateZ: this.state.top.interpolate({
+                                        inputRange: [0,1],
+                                        outputRange: ['0deg', '360deg']
+                                    })},
+                                {
+                                    rotateX: this.state.top.interpolate({
+                                        inputRange: [0,0.5,1],
+                                        outputRange: ['30deg', '0deg', '30deg']
+                                    })
+                                }
+                            ]
+                        },{top: -100+110}, {left: -100}, {borderWidth: 0}, {width: 120}, {height: 120}
+                        ]}>
+                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[1])}>
+                            <LinearGradient colors={colors[1]} style={styles.demo}/>
+                        </TouchableOpacity>
+                    </Animated.View>
+                    <Animated.View
+                        style={[{
+                            transform: [
+                                {
+                                    rotateZ: this.state.top.interpolate({
+                                        inputRange: [0,1],
+                                        outputRange: ['0deg', '360deg']
+                                    })},
+                                {
+                                    rotateX: this.state.top.interpolate({
+                                        inputRange: [0,0.5,1],
+                                        outputRange: ['30deg', '0deg', '30deg']
+                                    })
+                                }
+                            ]
+                        },{top: -240+110}, {left: 100}, {borderWidth: 0}, {width: 120}, {height: 120}
+                        ]}>
+                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[2])}>
+                            <LinearGradient colors={colors[2]} style={styles.demo}/>
+                        </TouchableOpacity>
+                    </Animated.View>
+                    <Animated.View
+                        style={[{
+                            transform: [
+                                {
+                                    rotateZ: this.state.top.interpolate({
+                                        inputRange: [0,1],
+                                        outputRange: ['0deg', '360deg']
+                                    })},
+                                {
+                                    rotateX: this.state.top.interpolate({
+                                        inputRange: [0,0.5,1],
+                                        outputRange: ['30deg', '0deg', '30deg']
+                                    })
+                                }
+                            ]
+                        },{top: -360+240}, {left: -60}, {borderWidth: 0}, {width: 120}, {height: 120}
+                        ]}>
+                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[2])}>
+                            <LinearGradient colors={colors[3]} style={styles.demo}/>
+                        </TouchableOpacity>
+                    </Animated.View>
+                    <Animated.View
+                        style={[{
+                            transform: [
+                                {
+                                    rotateZ: this.state.top.interpolate({
+                                        inputRange: [0,1],
+                                        outputRange: ['0deg', '360deg']
+                                    })},
+                                {
+                                    rotateX: this.state.top.interpolate({
+                                        inputRange: [0,0.5,1],
+                                        outputRange: ['30deg', '0deg', '30deg']
+                                    })
+                                }
+                            ]
+                        },{top: -480+240}, {left: 60}, {borderWidth: 0}, {width: 120}, {height: 120}
+                        ]}>
+                        <TouchableOpacity onPress={()=>self.currentPageChange(self, pages[2])}>
+                            <LinearGradient colors={colors[4]} style={styles.demo}/>
+                        </TouchableOpacity>
+                    </Animated.View>
+                    <View style={styles.test}>
+
+                    </View>
                 </Animated.View>
 
             </ImageBackground>
@@ -184,14 +204,14 @@ const styles = StyleSheet.create({
         width: 500,
         height: 400,
         alignItems: 'center',
-        borderWidth:2,
     },
     linearGradient: {
         width: 65,
         height: 65,
         backgroundColor:'#504488',
         borderRadius: 40,
-        opacity : 0.6
+        shadowColor: '#ccc',
+        shadowOffset:  {width: 3, height: 6}
     },
     demo: {
         width: 65,
@@ -199,7 +219,20 @@ const styles = StyleSheet.create({
         backgroundColor:'#504488',
         borderRadius: 40,
         transform: [{rotateZ:'45deg'}],
-        opacity : 0.6
+    },
+    test: {
+        width: 65,
+        height: 65,
+        backgroundColor:'#504488',
+        borderRadius: 40,
+        transform: [{rotateZ:'45deg'}],
+        opacity : 1,
+        borderWidth:2,
+        borderColor: '#fff',
+        shadowColor:'white',
+        shadowOffset:{h:10,w:10},
+        shadowRadius:3,
+        shadowOpacity:0.8,
     },
     text: {
         fontSize: 30
