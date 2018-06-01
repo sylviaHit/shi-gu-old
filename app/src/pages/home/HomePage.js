@@ -6,6 +6,7 @@ import {Animated, View, Easing, ImageBackground, TouchableOpacity, Dimensions, S
 import LinearGradient from 'react-native-linear-gradient';
 import { createStackNavigator } from 'react-navigation';
 import Person from "../person/Person";
+import { service } from "../../utils/service";
 
 
 export default class HomePage extends Component{
@@ -34,6 +35,8 @@ export default class HomePage extends Component{
 
     componentDidMount() {
         this.animation();
+        // service.get('http://cbdb.fas.harvard.edu/cbdbapi/person.php?name=王安石&o=json',{name:'wang'});
+        // service.get('http://cbdb.fas.harvard.edu/cbdbapi/person.php',{name:'王安石',o:'json'});
     }
 
     currentPageChange = (e, page) => {

@@ -2,9 +2,9 @@
  * 导航设置页
  */
 import React, { Component } from 'react';
-import HomePage from './pages/home/HomePage';
-import Poetry from './pages/poetry/Poetry';
-import Person from './pages/person/Person';
+import HomePage from './src/pages/home/HomePage';
+import Poetry from './src/pages/poetry/Poetry';
+import Person from './src/pages/person/Person';
 import { createStackNavigator } from 'react-navigation';
 
 
