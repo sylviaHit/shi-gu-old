@@ -152,8 +152,10 @@ export default class HomePage extends Component{
                             ]
                         },{top: -240+110}, {left: 100}, {borderWidth: 0}, {width: 120}, {height: 120}
                         ]}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Poetry')}>
-                            <LinearGradient colors={colors[2]} style={styles.demo}/>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate(pages[2])}>
+                            <LinearGradient colors={colors[2]} style={styles.demo}>
+                                <Text>{pages[2]}</Text>
+                            </LinearGradient>
                         </TouchableOpacity>
                     </Animated.View>
                     <Animated.View
