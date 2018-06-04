@@ -19,11 +19,6 @@ export default class HomePage extends Component{
         this.currentPageChange = this.currentPageChange.bind(this);
     }
 
-    static navigationOptions = ({navigation}) => ({
-        header: null,
-    });
-
-
     animation = () => {
         this.state.top.setValue(0);
         Animated.timing(this.state.top, {

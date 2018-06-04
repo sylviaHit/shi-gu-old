@@ -10,7 +10,6 @@ import Culture from './src/pages/culture/Culture';
 import Scene from './src/pages/scene/Scene';
 import { createStackNavigator } from 'react-navigation';
 
-
 const RootStack = createStackNavigator(
     {
         Home: { screen: HomePage },
@@ -21,7 +20,7 @@ const RootStack = createStackNavigator(
         Scene: { screen: Scene }
     },
     {
-        initialRouteName: 'Poetry',
+        initialRouteName: 'Home',
         mode: 'modal',
         headerMode: 'none',
     }
