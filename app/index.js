@@ -5,6 +5,9 @@ import React, { Component } from 'react';
 import HomePage from './src/pages/home/HomePage';
 import Poetry from './src/pages/poetry/Poetry';
 import Person from './src/pages/person/Person';
+import Road from './src/pages/road/Road';
+import Culture from './src/pages/culture/Culture';
+import Scene from './src/pages/scene/Scene';
 import { createStackNavigator } from 'react-navigation';
 
 
@@ -12,10 +15,13 @@ const RootStack = createStackNavigator(
     {
         Home: { screen: HomePage },
         Poetry:{ screen: Poetry },
-        Person: { screen: Person }
+        Person: { screen: Person },
+        Road: { screen: Road },
+        Culture:{ screen: Culture },
+        Scene: { screen: Scene }
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Poetry',
         mode: 'modal',
         headerMode: 'none',
     }

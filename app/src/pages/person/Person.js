@@ -21,14 +21,14 @@ export default class Person extends Component<Props> {
 
     render() {
         return (
-            <View>
-                <Text>Person----------</Text>
-            </View>
+            <ImageBackground style={styles.wrap} source= {require('../../images/poetry-bg.jpg')}>
+
+            </ImageBackground>
         );
     }
 }
 const styles = StyleSheet.create({
-    container: {
+    wrap: {
         flex:1,
         alignItems: 'center',
         justifyContent: 'center'

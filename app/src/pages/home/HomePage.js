@@ -54,7 +54,7 @@ export default class HomePage extends Component{
             ['#f3b41b', '#f0f32e', '#b9937e'],
             ['#783e3c', '#ff2511', '#88222d']
         ];
-        let pages=['Poetry', 'Person', 'road'];
+        let pages=['Poetry', 'Person', 'Road', 'Culture', 'Scene'];
         let views = this.state.anim.map(function(value, i) {
             return (
                 <Animated.View
@@ -103,11 +103,17 @@ export default class HomePage extends Component{
                                         inputRange: [0,0.5,1],
                                         outputRange: ['30deg', '0deg', '30deg']
                                     })
+                                },
+                                {
+                                    rotateY: this.state.top.interpolate({
+                                        inputRange: [0,0.4,0.5,0.9,1],
+                                        outputRange: ['-18deg', '0deg','-12deg', '-30deg','-18deg']
+                                    })
                                 }
                             ]
                         }]}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate(pages[0])}>
-                            <LinearGradient colors={colors[0]} style={styles.demo}>
+                        <TouchableOpacity style={styles.linearGradient} onPress={() => this.props.navigation.navigate(pages[0])}>
+                            <LinearGradient colors={colors[0]} style={[styles.demo]}>
                                 <Text>{pages[0]}</Text>
                             </LinearGradient>
                         </TouchableOpacity>
@@ -125,11 +131,17 @@ export default class HomePage extends Component{
                                         inputRange: [0,0.5,1],
                                         outputRange: ['30deg', '0deg', '30deg']
                                     })
+                                },
+                                {
+                                    rotateY: this.state.top.interpolate({
+                                        inputRange: [0,0.5,1],
+                                        outputRange: ['-30deg', '0deg', '-30deg']
+                                    })
                                 }
                             ]
                         },{top: -100+110}, {left: -100}, {borderWidth: 0}, {width: 120}, {height: 120}
                         ]}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate(pages[1])}>
+                        <TouchableOpacity style={styles.linearGradient} onPress={() => this.props.navigation.navigate(pages[1])}>
                             <LinearGradient colors={colors[1]} style={styles.demo}>
                                 <Text>{pages[1]}</Text>
                             </LinearGradient>
@@ -146,14 +158,22 @@ export default class HomePage extends Component{
                                 {
                                     rotateX: this.state.top.interpolate({
                                         inputRange: [0,0.5,1],
-                                        outputRange: ['30deg', '0deg', '30deg']
+                                        outputRange: ['0deg', '30deg', '0deg']
+                                    })
+                                },
+                                {
+                                    rotateY: this.state.top.interpolate({
+                                        inputRange: [0,0.5,1],
+                                        outputRange: ['-30deg', '0deg', '-30deg']
                                     })
                                 }
                             ]
                         },{top: -240+110}, {left: 100}, {borderWidth: 0}, {width: 120}, {height: 120}
                         ]}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Poetry')}>
-                            <LinearGradient colors={colors[2]} style={styles.demo}/>
+                        <TouchableOpacity style={styles.linearGradient} onPress={() => this.props.navigation.navigate(pages[2])}>
+                            <LinearGradient colors={colors[2]} style={styles.demo}>
+                                <Text>{pages[2]}</Text>
+                            </LinearGradient>
                         </TouchableOpacity>
                     </Animated.View>
                     <Animated.View
@@ -167,14 +187,22 @@ export default class HomePage extends Component{
                                 {
                                     rotateX: this.state.top.interpolate({
                                         inputRange: [0,0.5,1],
-                                        outputRange: ['30deg', '0deg', '30deg']
+                                        outputRange: ['0deg', '30deg', '0deg']
+                                    })
+                                },
+                                {
+                                    rotateY: this.state.top.interpolate({
+                                        inputRange: [0,0.5,1],
+                                        outputRange: ['-30deg', '0deg', '-30deg']
                                     })
                                 }
                             ]
                         },{top: -360+240}, {left: -60}, {borderWidth: 0}, {width: 120}, {height: 120}
                         ]}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Poetry')}>
-                            <LinearGradient colors={colors[3]} style={styles.demo}/>
+                        <TouchableOpacity style={styles.linearGradient} onPress={() => this.props.navigation.navigate(pages[3])}>
+                            <LinearGradient colors={colors[3]} style={styles.demo}>
+                                <Text>{pages[3]}</Text>
+                            </LinearGradient>
                         </TouchableOpacity>
                     </Animated.View>
                     <Animated.View
@@ -190,12 +218,20 @@ export default class HomePage extends Component{
                                         inputRange: [0,0.5,1],
                                         outputRange: ['30deg', '0deg', '30deg']
                                     })
+                                },
+                                {
+                                    rotateY: this.state.top.interpolate({
+                                        inputRange: [0,0.5,1],
+                                        outputRange: ['-30deg', '0deg', '-30deg']
+                                    })
                                 }
                             ]
                         },{top: -480+240}, {left: 60}, {borderWidth: 0}, {width: 120}, {height: 120}
                         ]}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Poetry')}>
-                            <LinearGradient colors={colors[4]} style={styles.demo}/>
+                        <TouchableOpacity style={styles.linearGradient} onPress={() => this.props.navigation.navigate(pages[4])}>
+                            <LinearGradient colors={colors[4]} style={styles.demo}>
+                                <Text>{pages[4]}</Text>
+                            </LinearGradient>
                         </TouchableOpacity>
                     </Animated.View>
                     <View style={styles.test}>
@@ -222,7 +258,7 @@ const styles = StyleSheet.create({
     linearGradient: {
         width: 65,
         height: 65,
-        backgroundColor:'#504488',
+        backgroundColor:'transparent',
         borderRadius: 40,
         shadowColor: '#ccc',
         shadowOffset:  {width: 3, height: 6}
@@ -230,7 +266,7 @@ const styles = StyleSheet.create({
     demo: {
         width: 65,
         height: 65,
-        backgroundColor:'#504488',
+        backgroundColor:'transparent',
         borderRadius: 40,
         transform: [{rotateZ:'45deg'}],
         alignItems: 'center',
