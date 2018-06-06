@@ -9,7 +9,6 @@
   "dependencies": {
     "react": "16.3.1",
     "react-native": "0.55.4",
-    "react-native-baidumap-sdk": "^0.5.5",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-svg": "^6.3.1",
     "react-navigation": "^2.0.4"
